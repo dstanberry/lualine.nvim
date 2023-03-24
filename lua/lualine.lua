@@ -174,7 +174,11 @@ local statusline = modules.utils.retry_call_wrap(function(sections, is_focused, 
       if #section_data > 0 then
         if not applied_midsection_divider and section_name > 'c' then
           applied_midsection_divider = true
-          section_data = modules.highlight.format_highlight('c', is_focused) .. '%=' .. section_data
+          if is_winbar then
+            section_data = '%=' .. section_data
+          else
+            section_data = modules.highlight.format_highlight('c', is_focused) .. '%=' .. section_data
+          end
         end
         if not applied_trunc and section_name > 'b' then
           applied_trunc = true
